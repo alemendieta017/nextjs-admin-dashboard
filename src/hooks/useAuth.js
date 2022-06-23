@@ -29,7 +29,10 @@ function useProvideAuth() {
       data: { access_token },
     } = await Axios.post(endPoints.auth.login, { email, password }, options)
 
-    console.log(access_token)
+    if (access_token) {
+      console.log(access_token)
+      Cookie.set('token', access_token, { expires: 5 })
+    }
   }
 
   return {
