@@ -2,6 +2,7 @@ import React, { useState, useContext, createContext } from 'react'
 import Cookie from 'js-cookie'
 import Axios from 'axios'
 import endPoints from '@services/api'
+import axios from 'axios'
 
 const AuthContext = createContext()
 
@@ -24,14 +25,18 @@ function useProvideAuth() {
         'Content-Type': 'application/json',
       },
     }
-
     const {
       data: { access_token },
     } = await Axios.post(endPoints.auth.login, { email, password }, options)
 
     if (access_token) {
-      console.log(access_token)
       Cookie.set('token', access_token, { expires: 5 })
+
+      axios.defaults.headers.Authorization = `Bearer ${access_token}`
+
+      const { data: user } = await axios.get(endPoints.auth.profile)
+
+      setUser(user)
     }
   }
 
