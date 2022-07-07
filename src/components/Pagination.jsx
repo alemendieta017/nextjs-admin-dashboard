@@ -19,7 +19,7 @@ const Paginate = ({
     Math.max(end - (neighbours * 2 + 1), 1),
     Math.max(current - neighbours, 1)
   )
-  console.log('End ' + end, 'Start ' + start, 'Current ' + current)
+
   for (let i = start; i < end; i++) {
     items.push(
       <a
