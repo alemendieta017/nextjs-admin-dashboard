@@ -7,6 +7,7 @@ import endPoints from '@services/api'
 import useAlert from '@hooks/useAlert'
 import Alert from '@common/Alert'
 import { deleteProduct } from '@services/api/product'
+import Link from 'next/link'
 
 const products = () => {
   const [open, setOpen] = useState(false)
@@ -136,12 +137,12 @@ const products = () => {
                         {product.id}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a
-                          href="/edit"
+                        <Link
+                          href={`/dashboard/edit/${product.id}`}
                           className="text-indigo-600 hover:text-indigo-900"
                         >
                           Edit
-                        </a>
+                        </Link>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <XCircleIcon

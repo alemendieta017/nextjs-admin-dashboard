@@ -1,8 +1,10 @@
 import { useRef } from 'react'
-import { addProduct } from '@services/api/product'
+import { addProduct, updateProduct } from '@services/api/product'
+import { useRouter } from 'next/router'
 
-export default function FormProduct({ setOpen, setAlert }) {
+export default function FormProduct({ setOpen, setAlert, product }) {
   const formRef = useRef(null)
+  const router = useRouter()
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -15,24 +17,30 @@ export default function FormProduct({ setOpen, setAlert }) {
       images: [formData.get('images').name],
     }
 
-    addProduct(data)
-      .then(() => {
-        setAlert({
-          active: true,
-          message: 'Product added succesfully',
-          type: 'success',
-          autoClose: false,
-        })
-        setOpen(false)
+    if (product) {
+      updateProduct(product.id, data).then(() => {
+        router.push('/dashboard/products/')
       })
-      .catch((err) => {
-        setAlert({
-          active: true,
-          message: err.message,
-          type: 'error',
-          autoClose: false,
+    } else {
+      addProduct(data)
+        .then(() => {
+          setAlert({
+            active: true,
+            message: 'Product added succesfully',
+            type: 'success',
+            autoClose: false,
+          })
+          setOpen(false)
         })
-      })
+        .catch((err) => {
+          setAlert({
+            active: true,
+            message: err.message,
+            type: 'error',
+            autoClose: false,
+          })
+        })
+    }
   }
 
   return (
@@ -48,6 +56,7 @@ export default function FormProduct({ setOpen, setAlert }) {
                 Title
               </label>
               <input
+                defaultValue={product?.title}
                 type="text"
                 name="title"
                 id="title"
@@ -62,6 +71,7 @@ export default function FormProduct({ setOpen, setAlert }) {
                 Price
               </label>
               <input
+                defaultValue={product?.price}
                 type="number"
                 name="price"
                 id="price"
@@ -76,6 +86,7 @@ export default function FormProduct({ setOpen, setAlert }) {
                 Category
               </label>
               <select
+                defaultValue={product?.category}
                 id="category"
                 name="category"
                 autoComplete="category-name"
@@ -97,6 +108,7 @@ export default function FormProduct({ setOpen, setAlert }) {
                 Description
               </label>
               <textarea
+                defaultValue={product?.description}
                 name="description"
                 id="description"
                 autoComplete="description"
@@ -132,6 +144,7 @@ export default function FormProduct({ setOpen, setAlert }) {
                       >
                         <span>Upload a file</span>
                         <input
+                          defaultValue={product?.images}
                           id="images"
                           name="images"
                           type="file"
