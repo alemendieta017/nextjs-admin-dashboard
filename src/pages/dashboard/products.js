@@ -8,8 +8,9 @@ import useAlert from '@hooks/useAlert'
 import Alert from '@common/Alert'
 import { deleteProduct } from '@services/api/product'
 import Link from 'next/link'
+import Image from 'next/image'
 
-const products = () => {
+const Products = () => {
   const [open, setOpen] = useState(false)
   const [products, setProducts] = useState([])
   const { alert, setAlert, toggleAlert } = useAlert()
@@ -110,10 +111,12 @@ const products = () => {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="flex-shrink-0 h-10 w-10">
-                            <img
+                            <Image
                               className="h-10 w-10 rounded-full"
                               src={product.images[0]}
                               alt=""
+                              height={40}
+                              width={40}
                             />
                           </div>
                           <div className="ml-4">
@@ -168,4 +171,4 @@ const products = () => {
   )
 }
 
-export default products
+export default Products

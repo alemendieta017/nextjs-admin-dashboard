@@ -18,7 +18,7 @@ export default function Edit() {
       setProduct(response.data)
     }
     getProduct()
-  }, [router?.isReady])
+  }, [router?.isReady, router?.query])
 
   return <FormProduct product={product} />
 }

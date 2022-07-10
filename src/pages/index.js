@@ -2,6 +2,8 @@
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
+import Image from 'next/image'
+import Link from 'next/link'
 
 const navigation = [
   { name: 'Product', href: '#' },
@@ -35,10 +37,12 @@ export default function Home() {
                   <div className="flex items-center justify-between w-full md:w-auto">
                     <a href="/workflow">
                       <span className="sr-only">Workflow</span>
-                      <img
+                      <Image
                         alt="Workflow"
                         className="h-8 w-auto sm:h-10"
                         src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                        height="40px"
+                        width="40px"
                       />
                     </a>
                     <div className="-mr-2 flex items-center md:hidden">
@@ -59,12 +63,11 @@ export default function Home() {
                       {item.name}
                     </a>
                   ))}
-                  <a
-                    href="/login"
-                    className="font-medium text-indigo-600 hover:text-indigo-500"
-                  >
-                    Log in
-                  </a>
+                  <Link href="/login" passHref>
+                    <a className="font-medium text-indigo-600 hover:text-indigo-500">
+                      Log in
+                    </a>
+                  </Link>
                 </div>
               </nav>
             </div>
@@ -85,10 +88,12 @@ export default function Home() {
                 <div className="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
                   <div className="px-5 pt-4 flex items-center justify-between">
                     <div>
-                      <img
+                      <Image
                         className="h-8 w-auto"
                         src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
                         alt=""
+                        height="40px"
+                        width="40px"
                       />
                     </div>
                     <div className="-mr-2">
@@ -109,12 +114,11 @@ export default function Home() {
                       </a>
                     ))}
                   </div>
-                  <a
-                    href="/login"
-                    className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100"
-                  >
-                    Log in
-                  </a>
+                  <Link href="/login">
+                    <a className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100">
+                      Log in
+                    </a>
+                  </Link>
                 </div>
               </Popover.Panel>
             </Transition>
@@ -156,10 +160,11 @@ export default function Home() {
         </div>
       </div>
       <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-        <img
-          className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
+        <Image
           src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
           alt=""
+          layout="fill"
+          className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
         />
       </div>
     </div>
